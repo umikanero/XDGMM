@@ -419,7 +419,7 @@ class XDGMM(BaseEstimator):
             self.fit(X, Xerr)
             if no_err: bics = np.append(bics, self.bic(X, Xerr_zero))
             else: bics = np.append(bics, self.bic(X, Xerr))
-            print "N =",n_components,", BIC =",bics[-1]
+            print("N =",n_components,", BIC =",bics[-1])
             if bics[-1] < lowest_bic:
                 optimal_n_comp = n_components
                 lowest_bic = bics[-1]
@@ -488,7 +488,7 @@ class XDGMM(BaseEstimator):
                 aics = np.append(aics, self.aic(X, Xerr_zero))
             else:
                 aics = np.append(aics, self.aic(X, Xerr))
-            print "N =", n_components, ", AIC =", aics[-1]
+            print("N =", n_components, ", AIC =", aics[-1])
             if aics[-1] < lowest_aic:
                 optimal_n_comp = n_components
                 lowest_aic = aics[-1]

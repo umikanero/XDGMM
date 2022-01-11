@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from astroML.plotting.tools import draw_ellipse
 from astroML.plotting import setup_text_plots
-from sklearn.mixture import GMM as skl_GMM
+from sklearn.mixture import GaussianMixture as skl_GMM
 
 def plot_bic(param_range,bics,lowest_comp):
     plt.clf()
