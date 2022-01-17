@@ -76,8 +76,8 @@ def plot_sample(x_true, y_true, x, y, sample, xdgmm):
     ax = [ax1, ax2, ax3, ax4]
 
     for i in range(4):
-        ax[i].set_xlim(-1, 13)
-        ax[i].set_ylim(-6, 16)
+        ax[i].set_xlim(-2, 2)
+        ax[i].set_ylim(-2, 2)
 
         ax[i].xaxis.set_major_locator(plt.MultipleLocator(4))
         ax[i].yaxis.set_major_locator(plt.MultipleLocator(5))
