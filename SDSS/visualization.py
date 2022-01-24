@@ -34,7 +34,7 @@ def visualize_3d_gmm(points, w, mu, stdev, type, index, export=True):
     for i in range(n_gaussians):
         if type == 'full':
             covariances = stdev[i][:3, :3]
-            filename = 'SDSS_full'
+            filename = 'SDSS full'
         elif type == 'tied':
             covariances = stdev[:3, :3]
             filename = 'VIPERS_GMM_W4a1_tied'
@@ -50,17 +50,16 @@ def visualize_3d_gmm(points, w, mu, stdev, type, index, export=True):
         plot_sphere(w=w[i], center=mu[:3, i], r=r, rotation=u, ax=axes)
         #[:, i]取所有行（即三个维度）的第i个数据
 
-    for n in range(n_gaussians):
-        data = points[np.where(index == n)]
-        plt.set_cmap('Set1')
-        colors = cmx.Set1(np.linspace(0, 1, n_gaussians))
-        axes.scatter(data[:, 0], data[:, 1], data[:, 2], s = 1.0, alpha = 0.1, color = colors[n])
+    # for n in range(n_gaussians):
+    #     data = points[np.where(index == n)]
+    #     plt.set_cmap('Set1')
+    #     colors = cmx.Set1(np.linspace(0, 1, n_gaussians))
+    #     axes.scatter(data[:, 0], data[:, 1], data[:, 2], s = 1.0, alpha = 0.8, color = colors[n])
 
     plt.title(filename)
     axes.set_xlabel('X /Mpc')
     axes.set_ylabel('Y /Mpc')
     axes.set_zlabel('Z /MPc')
-    axes.view_init(30, 30)
     x_major_locator = MultipleLocator(20)
     # 把x轴的刻度间隔设置为1，并存在变量里
     y_major_locator = MultipleLocator(20)
@@ -101,9 +100,9 @@ def plot_sphere(w=0, center=[0,0,0], r=[1, 1, 1], rotation=[1,1,1], ax=None):
 
     for i in range(len(x)):
         for j in range(len(x)):
-            [x[i, j], y[i, j], z[i, j]] = [x[i, j], y[i, j], z[i, j]] + center #spherical专用
-            #[x[i, j], y[i, j], z[i, j]] = np.dot([x[i, j], y[i, j], z[i, j]], rotation) + center
+            # [x[i, j], y[i, j], z[i, j]] = [x[i, j], y[i, j], z[i, j]] + center #spherical专用
+            [x[i, j], y[i, j], z[i, j]] = np.dot([x[i, j], y[i, j], z[i, j]], rotation) + center
 
-    ax.plot_surface(x, y, z, alpha=0.7)
+    ax.plot_surface(x, y, z, alpha=0.1)
 
     return ax
