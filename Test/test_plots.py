@@ -46,10 +46,10 @@ def plot_val_curve(param_range, train_mean, train_std, test_mean,
     plt.xlim(param_range.min(),param_range.max())
     plt.show()
 
-def plot_sample(x_true, y_true, x, y, sample, xdgmm):
+def plot_sample(x_true, y_true, x, y, gmm, xdgmm):
     setup_text_plots(fontsize=16, usetex=True)
     plt.clf()
-    fig = plt.figure(figsize=(12, 9))
+    fig = plt.figure(figsize=(9, 9))
     fig.subplots_adjust(left=0.1, right=0.95,
                         bottom=0.1, top=0.95,
                         wspace=0.02, hspace=0.02)
@@ -62,7 +62,9 @@ def plot_sample(x_true, y_true, x, y, sample, xdgmm):
     ax2.scatter(x, y, s=4, lw=0, c='k')
 
     ax3 = fig.add_subplot(223)
-    ax3.scatter(sample[:, 0], sample[:, 1], s=4, lw=0, c='k')
+    for i in range(gmm.n_components):
+        draw_ellipse(gmm.means_[i], gmm.covariances_[i], scales=[2], ax=ax3,
+                     ec='k', fc='gray', alpha=0.2)
 
     ax4 = fig.add_subplot(224)
     for i in range(xdgmm.n_components):
@@ -70,8 +72,8 @@ def plot_sample(x_true, y_true, x, y, sample, xdgmm):
                      ec='k', fc='gray', alpha=0.2)
 
     titles = ["True Distribution", "Noisy Distribution",
-              "Extreme Deconvolution\n  resampling",
-            "Extreme Deconvolution\n  cluster locations"]
+              "Gaussian Mixture Models",
+            "Extreme Deconvolution  GMM"]
 
     ax = [ax1, ax2, ax3, ax4]
 
@@ -79,8 +81,8 @@ def plot_sample(x_true, y_true, x, y, sample, xdgmm):
         ax[i].set_xlim(-2, 2)
         ax[i].set_ylim(-2, 2)
 
-        ax[i].xaxis.set_major_locator(plt.MultipleLocator(4))
-        ax[i].yaxis.set_major_locator(plt.MultipleLocator(5))
+        ax[i].xaxis.set_major_locator(plt.MultipleLocator(2))
+        ax[i].yaxis.set_major_locator(plt.MultipleLocator(2))
 
         ax[i].text(0.05, 0.95, titles[i],
                    ha='left', va='top', transform=ax[i].transAxes)
